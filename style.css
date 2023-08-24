@@ -1,8 +1,4 @@
-#all-contents {
-    max-width: 800px;
-    margin: auto;
-}
- body {
+body {
     background: rgb(125, 198, 205);
     color: rgb(45, 45, 45);
     padding: 10px;
@@ -15,16 +11,15 @@
 
 /* navigation menu */
 nav {
-    background: rgb(239, 80, 41);
-   margin: 0 auto;
-   margin-bottom: 20px
+    background: rgb(118, 241, 2);
+   margin: 20px;
     display: flex;
     padding: 10px;
 }
 h1 {
     display: flex;
     align-items: center;
-    color: rgb(189, 15, 15);
+    color: rgb(119, 0, 255);
     flex: 1;
     margin: 0;
 }
@@ -37,12 +32,12 @@ h1 {
 }
 a {
     text-decoration: none;
-    color: #5fa0b4;
+    color: #ff0b0b;
 }
 
 /* main container area beneath menu */
 main {
-    background: rgb(230, 168, 0);
+    background: rgb(255, 187, 0);
     display: flex;
 }
 .sidebar {
