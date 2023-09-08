@@ -1,6 +1,6 @@
 // setup variables
 const walkAcceleration = 2.5; // how much is added to the speed each frame
-const gravity = 0.5; // how much is subtracted from speedY each frame
+const gravity = 0.3; // how much is subtracted from speedY each frame
 const friction = 1.5; // how much the player is slowed each frame
 const maxSpeed = 8; // maximum horizontal speed, not vertical
 const playerJumpStrength = 12; // this is subtracted from the speedY each jump
@@ -11,18 +11,18 @@ const projectileSpeed = 8; // the speed of projectiles
 /////////////////////////////////////////////////
 
 // Base game variables
-const frameRate = 60;
-const playerScale = 0.8; //makes the player just a bit smaller. Doesn't affect the hitbox, just the image
+const frameRate = 100;
+const playerScale = 0.4; //makes the player just a bit smaller. Doesn't affect the hitbox, just the image
 
 // Player variables
 const player = {
-  x: 50,
-  y: 100,
-  speedX: 0,
-  speedY: 0,
+  x: 100,
+  y: 10,
+  speedX:5,
+  speedY:7,
   width: undefined,
-  height: undefined,
-  onGround: false,
+  height: 0.00000001,
+  onGround: true,
   facingRight: true,
   deadAndDeathAnimationDone: false,
 };
@@ -61,7 +61,7 @@ let duckTimer = 0;
 let DUCK_COUNTER_IDLE_VALUE = 14;
 let debugVar = false;
 
-let spriteHeight = 0;
+let spriteHeight = .0002;
 let spriteWidth = 0;
 let spriteX = 0;
 let spriteY = 0;
@@ -74,7 +74,7 @@ let cannons = [];
 const cannonWidth = 118;
 const cannonHeight = 80;
 let projectiles = [];
-const defaultProjectileWidth = 24;
+const defaultProjectileWidth = 20;
 const defaultProjectileHeight = defaultProjectileWidth;
 const collectableWidth = 40;
 const collectableHeight = 40;
