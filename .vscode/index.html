@@ -1,0 +1,82 @@
+<!doctype html>
+
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<title>Operation Spark || Motion Poem</title>
+		<meta name="description" content="Operation Spark Motion Poem">
+		<meta name="author" content="operationspark.org">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    
+	    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+	    <link href="css/style.css" rel="stylesheet">
+
+		<!-- all core CreateJS and 3rd party libraries are listed here: -->
+		<script src="bower_components/lodash/lodash.min.js"></script>
+		<script src="bower_components/easeljs/lib/easeljs-0.8.0.min.js"></script>
+		<script src="bower_components/PreloadJS/lib/preloadjs-0.6.0.min.js"></script>
+		<script src="bower_components/SoundJS/lib/soundjs-0.6.0.min.js"></script>
+		<script src="bower_components/opspark-draw/draw.js"></script>
+        <script src="bower_components/racket/racket.js"></script>
+
+	    <!-- our app javascript code -->
+	    <script src="js/opspark.js"></script>
+	</head>
+	<body>
+		<div>
+			<!-- canvas element that serves as the stage for our app or game -->
+			<canvas id="canvas" width="500" height="500"></canvas>
+		</div>
+		<script id="motion-poem">
+			(function(){
+				'use strict';
+                
+                var 
+                    draw = window.opspark.draw,
+                    physikz = window.opspark.racket.physikz,
+                    
+                    app = window.opspark.makeApp({update: update}),
+                    canvas = app.canvas, 
+                    view = app.view,
+                    fps = draw.fps('#000');
+				
+				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		        // TODO : REPLACE ALL EXAMPLE CODE YOUR OWN MOTION POEM ASSETS                                                    //
+		        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+		        /* 1. *************************************************************************************************************
+		         *
+		         * DECLARE VARIABLES HERE
+		         * (EXAMPLE: Declaring a variable called shape)
+		         *
+		         */
+		        var shape;
+
+
+		        /* 2. *************************************************************************************************************
+                 * 
+                 * INITIALIZE VARIABLES HERE
+                 * (EXAMPLE: Drawing a grey circle with a radius of 10 and adding it to the center of the view)
+                 *
+                 */
+                shape = draw.circle(10, '#CCC');
+                shape.x = shape.y = (canvas.width - shape.width) / 2;
+                view.addChild(shape);
+
+                function update() {						
+					/* 3. *********************************************************************************************************
+	                 *
+	                 * UPDATE ANY VARIABLES HERE > NOTE: The update() method is called 60 times per second.
+	                 * (EXAMPLE: Move the shape on its x-axis 1 pixel to the right per frame, then check its position against the stage boundaries)
+	                 *
+	                 */
+	                shape.x += 1;
+	                if (shape.x > canvas.width + shape.radius) { shape.x = -(shape.radius); }
+                }
+			})();
+		</script>
+	</body>
+
+</html>
