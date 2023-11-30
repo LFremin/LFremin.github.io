@@ -1,36 +1,35 @@
 <!doctype html>
-
 <html>
-	<head>
-		<meta charset="utf-8">
-
-		<title>Operation Spark || Motion Poem</title>
-		<meta name="description" content="Operation Spark Motion Poem">
-		<meta name="author" content="operationspark.org">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	    
-	    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-	    <link href="css/style.css" rel="stylesheet">
-
-		<!-- all core CreateJS and 3rd party libraries are listed here: -->
-		<script src="bower_components/lodash/lodash.min.js"></script>
-		<script src="bower_components/easeljs/lib/easeljs-0.8.0.min.js"></script>
-		<script src="bower_components/PreloadJS/lib/preloadjs-0.6.0.min.js"></script>
-		<script src="bower_components/SoundJS/lib/soundjs-0.6.0.min.js"></script>
-		<script src="bower_components/opspark-draw/draw.js"></script>
+    <head>
+        <meta charset="utf-8">
+        <title>Operation Spark || Motion Poem</title>
+        <meta name="description" content="Operation Spark Motion Poem">
+        <meta name="author" content="operationspark.org">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+        <link href="css/style.css" rel="stylesheet">
+        <!-- all core CreateJS and 3rd party libraries are listed here: -->
+        <script src="bower_components/lodash/lodash.min.js"></script>
+        <script src="bower_components/easeljs/lib/easeljs-0.8.0.min.js"></script>
+        <script src="bower_components/PreloadJS/lib/preloadjs-0.6.0.min.js"></script>
+        <script src="bower_components/SoundJS/lib/soundjs-0.6.0.min.js"></script>
+        <script src="bower_components/opspark-draw/draw.js"></script>
         <script src="bower_components/racket/racket.js"></script>
-
-	    <!-- our app javascript code -->
-	    <script src="js/opspark.js"></script>
-	</head>
-	<body>
-		<div>
-			<!-- canvas element that serves as the stage for our app or game -->
-			<canvas id="canvas" width="500" height="500"></canvas>
-		</div>
-		<script id="motion-poem">
-			(function(){
-				'use strict';
+        <!-- our app javascript code -->
+        <script src="js/opspark.js"></script>
+        
+        <style type="text/css">
+            /*override default styles here*/
+        </style>
+    </head>
+    <body>
+        <div>
+            <canvas id="canvas" width="500" height="500"></canvas>
+        </div>
+        <script id="motion-poem">
+            (function(){
+                'use strict';
                 
                 var 
                     draw = window.opspark.draw,
@@ -40,43 +39,69 @@
                     canvas = app.canvas, 
                     view = app.view,
                     fps = draw.fps('#000');
-				
-				////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		        // TODO : REPLACE ALL EXAMPLE CODE YOUR OWN MOTION POEM ASSETS                                                    //
-		        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-		        /* 1. *************************************************************************************************************
-		         *
-		         * DECLARE VARIABLES HERE
-		         * (EXAMPLE: Declaring a variable called shape)
-		         *
-		         */
-		        var shape;
-
-
-		        /* 2. *************************************************************************************************************
-                 * 
-                 * INITIALIZE VARIABLES HERE
-                 * (EXAMPLE: Drawing a grey circle with a radius of 10 and adding it to the center of the view)
-                 *
-                 */
-                shape = draw.circle(10, '#CCC');
-                shape.x = shape.y = (canvas.width - shape.width) / 2;
-                view.addChild(shape);
-
-                function update() {						
-					/* 3. *********************************************************************************************************
-	                 *
-	                 * UPDATE ANY VARIABLES HERE > NOTE: The update() method is called 60 times per second.
-	                 * (EXAMPLE: Move the shape on its x-axis 1 pixel to the right per frame, then check its position against the stage boundaries)
-	                 *
-	                 */
-	                shape.x += 1;
-	                if (shape.x > canvas.width + shape.radius) { shape.x = -(shape.radius); }
+                
+                ////////////////////////////////////////////////////////////////
+                // ALL CODE GOES BELOW HERE                                   //
+                ////////////////////////////////////////////////////////////////
+                
+                // TODO 1: Declare our variables //
+                
+                
+                // TODO 2: Initialize our variables //
+                
+                
+                while (i < 100) {
+                    // TODO 3 : YOUR CODE STARTS HERE //////////////////////////
+                    
+                    
+                    
+                    
+                    // TODO 3 : YOUR CODE ENDS HERE ////////////////////////////
+                    
+                    /*
+                     * IMPORTANT NOTE: 
+                     * The statement i++; increments our counter by 1 on each loop.
+                     * If we did not do this, the conditional check of while (i < 100)
+                     * would never return false, and we would loop forever!
+                     *
+                     * Leave this as the last statement in the while loop
+                     */
+                    i++;
                 }
-			})();
-		</script>
-	</body>
+                
+                view.addChild(fps);
+                app.addUpdateable(fps);
+                function update() {
+                    for (var i = 0; i < circles.length; i++) {
+                        // TODO 4 : Access one circle at time from the circles Array //
+                        
+                        
+                        // TODO 5 : Update the circles position //
+                        
+                        
+                        // TODO 6 : YOUR CODE STARTS HERE //////////////////////
+                        
+                        if ( / * test for right-side * / ) {
+                            // your code to place circle exactly off the stage at the left-side //
+                        } else if ( / * test for left-side * / ) {
+                            // your code to place circle exactly off the stage at the right-side //
+                        } if ( / * test for top * / ) {
+                        }
 
+                        if ( / * test for top * / ) {
+                            // code to place circle exactly off the stage at the bottom //
+                        } else if ( / * test for bottom * / ) {
+                            // your code to place circle exactly off the stage at the top //
+                        }
+                        
+                        // YOUR TODO 6 CODE ENDS HERE //////////////////////////
+                    }
+                }
+                
+            ////////////////////////////////////////////////////////////////////
+            // NO CODE BELOW HERE                                             //
+            ////////////////////////////////////////////////////////////////////
+            })();
+        </script>
+    </body>
 </html>

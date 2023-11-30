@@ -1,4 +1,4 @@
-doctype html>
+<!doctype html>
 
 <html>
     <head>
@@ -14,13 +14,14 @@ doctype html>
 
         <!-- all core CreateJS and 3rd party libraries are listed here: -->
         <script src="bower_components/lodash/lodash.min.js"></script>
-        <script src="bower_components/easeljs/lib/easeljs-0.8.2.min.js"></script>
+        <script src="bower_components/easeljs/lib/easeljs-0.8.0.min.js"></script>
+        <script src="bower_components/PreloadJS/lib/preloadjs-0.6.0.min.js"></script>
+        <script src="bower_components/SoundJS/lib/soundjs-0.6.0.min.js"></script>
         <script src="bower_components/opspark-draw/draw.js"></script>
         <script src="bower_components/racket/racket.js"></script>
 
         <!-- our app javascript code -->
         <script src="js/opspark.js"></script>
-        <script src="js/init.js"></script>
         
         <style type="text/css">
             /*override default styles here*/
@@ -33,49 +34,101 @@ doctype html>
         <script id="motion-poem">
             (function(){
                 'use strict';
+                
                 var 
-            draw = window.opspark.draw,
-            physikz = window.opspark.racket.physikz,
-            
-            app = window.opspark.makeApp({update: update}),
-            canvas = app.canvas, 
-            view = app.view,
-            fps = draw.fps('#000');
-        
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        // TODO : REPLACE ALL EXAMPLE CODE YOUR OWN MOTION POEM ASSETS                                                    //
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    draw = window.opspark.draw,
+                    physikz = window.opspark.racket.physikz,
+                    
+                    app = window.opspark.makeApp({update: update}),
+                    canvas = app.canvas, 
+                    view = app.view,
+                    fps = draw.fps('#000');
+                
+                ////////////////////////////////////////////////////////////////
+                // ALL CODE GOES BELOW HERE                                   //
+                ////////////////////////////////////////////////////////////////
+                
+                // TODO 1: Declare our variables //
+                var i, circle, circles;
+                
+                // TODO 2: Initialize our variables //
+                i = 0;
+                circles = [];
+                
+                
+                while (i < 100) {
+                    // TODO 3 : YOUR CODE STARTS HERE //////////////////////////
+                    circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+                    
+                    if (circle.alpha < .2) {
+                        draw.blurFilterOn(circle);
+                    }
+                    
+                    physikz.addRandomVelocity(circle, canvas);
+                    circles.push(circle);
+                    view.addChild(circle);
+                    
+                    // TODO 3 : YOUR CODE ENDS HERE ////////////////////////////
+                    
+                    /*
+                     * IMPORTANT NOTE: 
+                     * The statement i++; increments our counter by 1 on each loop.
+                     * If we did not do this, the conditional check of while (i < 100)
+                     * would never return false, and we would loop forever!
+                     *
+                     * Leave this as the last statement in the while loop
+                     */
+                    i++;
+                }
+                
+                view.addChild(fps);
+                app.addUpdateable(fps);
 
-
-        /* 1. *************************************************************************************************************
-         *
-         * DECLARE VARIABLES HERE
-         * (EXAMPLE: Declaring a variable called shape)
-         *
-         */
-        var shape;
-
-
-        /* 2. *************************************************************************************************************
-         * 
-         * INITIALIZE VARIABLES HERE
-         * (EXAMPLE: Drawing a grey circle with a radius of 10 and adding it to the center of the view)
-         *
-         */
-        shape = draw.circle(10, '#CCC');
-        shape.x = shape.y = (canvas.width - shape.width) / 2;
-        view.addChild(shape);
-
-        function update() {                     
-            /* 3. *********************************************************************************************************
-             *
-             * UPDATE ANY VARIABLES HERE > NOTE: The update() method is called 60 times per second.
-             * (EXAMPLE: Move the shape on its x-axis 1 pixel to the right per frame, then check its position against the stage boundaries)
-             *
-             */
-            shape.x += 1;
-            if (shape.x > canvas.width + shape.radius) { shape.x = -(shape.radius); }
-        }
+                function update() {
+                    for (var i = 0; i < circles.length; i++) {
+                        ////////////////////////////////////////////////////////
+                        // ALTERNATIVELY : USE OUR LITTLE physikz LIBRARY     //
+                        //                                                    //
+                        // BUT YOU'll NEED TO REMOVE ANY OTHER FOR LOOP CODE  //
+                        ////////////////////////////////////////////////////////
+                        //physikz.updateRadialPositionInArea(circles[i], canvas);
+                        
+                        
+                        // TODO 4 : Access one circle at time from the circles Array //
+                        circle = circles[i];
+                        
+                        // TODO 5 : Update the circles position //
+                        physikz.updatePosition(circle);
+                        
+                        ////////////////////////////////////////////////////////
+                        // TODO 6 SOLUTION                                    //
+                        ////////////////////////////////////////////////////////
+                        
+                        // TODO 6 : YOUR CODE STARTS HERE //
+                        
+                        var radius = circle.radius;
+                        var areaWidth = canvas.width + radius;
+                        var areaHeight = canvas.height + radius;
+                        
+                        if (circle.x > areaWidth) {
+                            circle.x = -circle.radius;
+                        } else if (circle.x < -circle.radius) {
+                            circle.x = areaWidth;
+                        }
+                        
+                        if (circle.y > areaHeight) {
+                            circle.y = -circle.radius;
+                        } else if (circle.y < -circle.radius) {
+                            circle.y = areaHeight;
+                        }
+                        
+                        // YOUR TODO 6 CODE ENDS HERE //
+                    }
+                }
+                
+            ////////////////////////////////////////////////////////////////////
+            // NO CODE BELOW HERE                                             //
+            ////////////////////////////////////////////////////////////////////
             })();
         </script>
     </body>
