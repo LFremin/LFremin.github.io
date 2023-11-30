@@ -35,10 +35,6 @@ var init = function (window) {
         
         // TODO 3 : Call the drawCircle function 5 times //
         drawCircle();
-        drawCircle();
-        drawCircle();
-        drawCircle();
-        drawCircle();
 
         // TODO 7 : Create a Loop to call drawCircle 100 times
         var counter = 0;
