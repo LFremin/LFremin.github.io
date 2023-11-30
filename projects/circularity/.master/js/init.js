@@ -35,6 +35,10 @@ var init = function (window) {
         
         // TODO 3 : Call the drawCircle function 5 times //
         drawCircle();
+        drawCircle();
+        drawCircle();
+        drawCircle();
+        drawCircle();
 
         // TODO 7 : Create a Loop to call drawCircle 100 times
         var counter = 0;
@@ -67,18 +71,18 @@ var init = function (window) {
     
         function update() {
             // TODO 4 : Update the circle's position //
-            physikz.updatePosition(circles[0]);
-            physikz.updatePosition(circles[1]);
-            physikz.updatePosition(circles[2]);
-            physikz.updatePosition(circles[3]);
-            physikz.updatePosition(circles[4]);
+            // physikz.updatePosition(circles[0]);
+            // physikz.updatePosition(circles[1]);
+            // physikz.updatePosition(circles[2]);
+            // physikz.updatePosition(circles[3]);
+            // physikz.updatePosition(circles[4]);
             
             // TODO 6 : Call checkCircleBounds on your circles.
-            runner.checkCircleBounds(circles[0]);
-            runner.checkCircleBounds(circles[1]);
-            runner.checkCircleBounds(circles[2]);
-            runner.checkCircleBounds(circles[3]);
-            runner.checkCircleBounds(circles[4]);
+            // runner.checkCircleBounds(circles[0]);
+            // runner.checkCircleBounds(circles[1]);
+            // runner.checkCircleBounds(circles[2]);
+            // runner.checkCircleBounds(circles[3]);
+            // runner.checkCircleBounds(circles[4]);
     
             // TODO 8 : Iterate over the array
             for (var i = 0; i < circles.length; i++) {
