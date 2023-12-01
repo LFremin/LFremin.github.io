@@ -27,7 +27,7 @@
     "tag": "0.0.5",
     "commit": "2c909c04eddac3cbcf8a745ab4dd8f8dec991d3c"
   },
-  "_source": "git://github.com/OperationSpark/racket.git",
-  "_target": "~0.0.5",
+  "_source": "https://github.com/OperationSpark/racket.git",
+  "_target": "0.0.5",
   "_originalSource": "racket"
 }

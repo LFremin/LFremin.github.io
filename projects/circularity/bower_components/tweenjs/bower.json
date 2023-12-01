@@ -22,15 +22,5 @@
     "docs",
     "examples",
     ".*"
-  ],
-  "version": "16.6.0",
-  "_release": "16.6.0",
-  "_resolution": {
-    "type": "version",
-    "tag": "v16.6.0",
-    "commit": "ae085330fbc0c4e7911c69e786bd3f697f95943f"
-  },
-  "_source": "https://github.com/sole/tween.js.git",
-  "_target": "*",
-  "_originalSource": "tweenjs"
+  ]
 }

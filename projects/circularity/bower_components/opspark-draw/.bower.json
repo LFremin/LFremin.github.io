@@ -33,7 +33,7 @@
     "tag": "0.3.12",
     "commit": "3c1cf3e0937c202d30e68d0517306e48c934b8b3"
   },
-  "_source": "git://github.com/OperationSpark/draw.git",
-  "_target": "~0.3.12",
+  "_source": "https://github.com/OperationSpark/draw.git",
+  "_target": "0.3.12",
   "_originalSource": "opspark-draw"
 }
