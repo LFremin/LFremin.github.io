@@ -1,14 +1,10 @@
-// HTML jQuery Objects
 var board = $("#board");
 var scoreElement = $("#score");
 var highScoreElement = $("#highScore");
 
-// Game Variables
-var snake = {}; // Declaration of snake object
-var apple = {}; // Declaration of apple object
-var score = 0; // Declaration of score variable
-
-// Constant Variables
+var snake = {}; 
+var apple = {}; 
+var score = 0; 
 var ROWS = 20;
 var COLUMNS = 20;
 var SQUARE_SIZE = 20;
@@ -19,38 +15,23 @@ var KEY = {
   DOWN: 40,
 };
 
-// interval variable required for stopping the update function when the game ends
 var updateInterval;
 
-// variable to keep track of the key (keycode) last pressed by the user
 var activeKey;
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////// GAME SETUP //////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
-
-// turn on keyboard inputs
 $("body").on("keydown", handleKeyDown);
 
-// start the game
 init();
 
 function init() {
-  // initialize the snake
   snake.body = [];
   makeSnakeSquare(10, 10);
   snake.head = snake.body[0];
 
-  // initialize the apple
   makeApple();
 
-  // Initialize the interval
   updateInterval = setInterval(update, 100);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-///////////////////////// PROGRAM FUNCTIONS ////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 
 function update() {
   moveSnake();
@@ -83,16 +64,30 @@ function moveSnake() {
   var nextColumn = snake.head.column;
 
   if (snake.head.direction === "left") {
-    nextColumn--;
-  } else if (snake.head.direction === "up") {
-    nextRow--;
+    nextColumn -= 1;
   } else if (snake.head.direction === "right") {
-    nextColumn++;
+    nextColumn += 1;
+  } else if (snake.head.direction === "up") {
+    nextRow -= 1;
   } else if (snake.head.direction === "down") {
-    nextRow++;
+    nextRow += 1;
   }
 
-  makeSnakeSquare(nextRow, nextColumn);
+  snake.head.row = nextRow;
+  snake.head.column = nextColumn;
+  repositionSquare(snake.head);
+
+  for (var i = snake.body.length - 1; i > 0; i--) {
+    var currentSquare = snake.body[i];
+    var nextSquare = snake.body[i - 1];
+
+    var nextRow = nextSquare.row;
+    var nextColumn = nextSquare.column;
+
+    currentSquare.row = nextRow;
+    currentSquare.column = nextColumn;
+    repositionSquare(currentSquare);
+  }
 }
 
 function hasHitWall() {
@@ -121,13 +116,13 @@ function handleAppleCollision() {
   var nextColumn = snake.tail.column;
 
   if (snake.tail.direction === "left") {
-    nextColumn++;
-  } else if (snake.tail.direction === "up") {
-    nextRow++;
+    nextColumn += 1;
   } else if (snake.tail.direction === "right") {
-    nextColumn--;
+    nextColumn -= 1;
+  } else if (snake.tail.direction === "up") {
+    nextRow += 1;
   } else if (snake.tail.direction === "down") {
-    nextRow--;
+    nextRow -= 1;
   }
 
   makeSnakeSquare(nextRow, nextColumn);
@@ -153,10 +148,6 @@ function endGame() {
   score = 0;
   setTimeout(init, 500);
 }
-
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 
 function makeApple() {
   apple.element = $("<div>").addClass("apple").appendTo(board);
