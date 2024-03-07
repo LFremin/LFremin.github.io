@@ -48,10 +48,10 @@ function update() {
 function checkForNewDirection(event) {
   if (activeKey === KEY.LEFT && snake.head.direction !== "right") {
     snake.head.direction = "left";
-  } else if (activeKey === KEY.UP && snake.head.direction !== "down") {
-    snake.head.direction = "up";
   } else if (activeKey === KEY.RIGHT && snake.head.direction !== "left") {
     snake.head.direction = "right";
+  } else if (activeKey === KEY.UP && snake.head.direction !== "down") {
+    snake.head.direction = "up";
   } else if (activeKey === KEY.DOWN && snake.head.direction !== "up") {
     snake.head.direction = "down";
   }
@@ -60,22 +60,49 @@ function checkForNewDirection(event) {
 function moveSnake() {
   checkForNewDirection();
 
+  for (var i = snake.body.length -1; i >= 1; i--) {
+    var snakeSquare = snake.body[i]
+    var nextSnakeSquare = snake.body[i-1]
+
+    var nextRow = nextSnakeSquare.row
+    var nextColumn = nextSnakeSquare.column
+    var nextDirection = nextSnakeSquare.direction
+
+    snakeSquare.direction = nextDirection;
+    snakeSquare.row = nextRow;
+    snakeSquare.column = nextColumn;
+    repositionSquare(snakeSquare);
+  }
+
   var nextRow = snake.head.row;
   var nextColumn = snake.head.column;
 
   if (snake.head.direction === "left") {
-    nextColumn -= 1;
+    snake.head.column = snake.head.column - 1;
   } else if (snake.head.direction === "right") {
-    nextColumn += 1;
+    snake.head.column = snake.head.column + 1;
   } else if (snake.head.direction === "up") {
-    nextRow -= 1;
+    snake.head.row = snake.head.row - 1;
   } else if (snake.head.direction === "down") {
-    nextRow += 1;
+    snake.head.row = snake.head.row + 1;
   }
-
-  snake.head.row = nextRow;
-  snake.head.column = nextColumn;
   repositionSquare(snake.head);
+}
+
+function hasHitWall() {
+  if (snake.head.row === ROWS + 1) {
+    return true
+  } if (snake.head.row === -1) {
+    return true
+  } if (snake.head.column === COLUMNS + 1) {
+    return true
+  } if (snake.head.column === -1) {
+    return true
+  }else {
+    return false
+  }
+}
+
 
   for (var i = snake.body.length - 1; i > 0; i--) {
     var currentSquare = snake.body[i];
@@ -88,7 +115,7 @@ function moveSnake() {
     currentSquare.column = nextColumn;
     repositionSquare(currentSquare);
   }
-}
+
 
 function hasHitWall() {
   return (
@@ -100,9 +127,12 @@ function hasHitWall() {
 }
 
 function hasCollidedWithApple() {
-  return (
-    snake.head.row === apple.row && snake.head.column === apple.column
-  );
+  
+ if ((snake.head.row === apple.row) && (snake.head.column === apple.column)) {
+  return true
+ }
+
+  return false;
 }
 
 function handleAppleCollision() {
@@ -112,31 +142,31 @@ function handleAppleCollision() {
   apple.element.remove();
   makeApple();
 
-  var nextRow = snake.tail.row;
-  var nextColumn = snake.tail.column;
+  var row = 0;
+  var column = 0;
 
-  if (snake.tail.direction === "left") {
-    nextColumn += 1;
-  } else if (snake.tail.direction === "right") {
-    nextColumn -= 1;
-  } else if (snake.tail.direction === "up") {
-    nextRow += 1;
+  row = snake.tail.row;
+  column = snake.tail.column;
+  if (snake.tail.direction === "left") { 
+    column++
+  } else if (snake.tail.direction === "right") { 
+    column--
+  } else if (snake.tail.direction === "up") { 
+    row++
   } else if (snake.tail.direction === "down") {
-    nextRow -= 1;
+    row--
   }
 
   makeSnakeSquare(nextRow, nextColumn);
 }
 
 function hasCollidedWithSnake() {
-  for (var i = 1; i < snake.body.length; i++) {
-    if (
-      snake.head.row === snake.body[i].row &&
-      snake.head.column === snake.body[i].column
-    ) {
+  for (let i = 1; i < snake.body.length; i++) {
+    if (snake.head.row === snake.body[i].row && snake.head.column === snake.body[i].column) {
       return true;
     }
   }
+
   return false;
 }
 
@@ -174,9 +204,11 @@ function makeSnakeSquare(row, column) {
     snakeSquare.element.attr("id", "snake-head");
   }
 
-  snake.body.unshift(snakeSquare);
-  snake.head = snake.body[0];
+  snake.body.push(snakeSquare);
+  snake.tail = snakeSquare;
 }
+
+
 
 function handleKeyDown(event) {
   activeKey = event.which;
