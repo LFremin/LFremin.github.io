@@ -1,11 +1,9 @@
 $(document).ready(runProgram); 
 
 function runProgram(){
-  // Constant Variables
   var FRAME_RATE = 60;
   var FRAMES_PER_SECOND_INTERVAL = 1000 / FRAME_RATE;
 
-  // Game Item Objects
   var walker = {
     x: 0,
     y: 0,
@@ -13,18 +11,14 @@ function runProgram(){
     speedY: 0
   };
 
-  // one-time setup
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);
   $(document).on('keydown', handleKeyDown);
 
-  ////////////////////////////////////////////////////////////////////////////////
-  ///////////////////////// CORE LOGIC ///////////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////
 
   function newFrame() {
     repositionGameItem();
     redrawGameItem();
-    wallCollision(); // Check for collision with walls
+    wallCollision(); 
   }
   
   function handleKeyDown(event) {
@@ -35,7 +29,6 @@ function runProgram(){
       DOWN: 40
     };
     
-    // Set speed based on key pressed
     if (event.which === KEY.LEFT) {
       walker.speedX = -5;
     } else if (event.which === KEY.UP) {
@@ -48,19 +41,16 @@ function runProgram(){
   }
 
   function handleKeyUp(event) {
-    // Reset speed when key is released
     walker.speedX = 0;
     walker.speedY = 0;
   }
 
   function repositionGameItem() {
-    // Update position based on speed
     walker.x += walker.speedX;
     walker.y += walker.speedY;
   }
 
   function redrawGameItem() {
-    // Redraw the game item
     $('#walker').css({
       left: walker.x + 'px',
       top: walker.y + 'px'
@@ -68,7 +58,6 @@ function runProgram(){
   }
 
   function wallCollision() {
-    // Prevent the walker from leaving the board area
     var boardWidth = $('#board').width();
     var boardHeight = $('#board').height();
     
@@ -84,12 +73,7 @@ function runProgram(){
       walker.y = boardHeight;
     }
   }
-
-  ////////////////////////////////////////////////////////////////////////////////
-  ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
-  ////////////////////////////////////////////////////////////////////////////////
-
-  // Event handler for keyup event
+  
   $(document).on('keyup', handleKeyUp);
 
   function endGame() {
