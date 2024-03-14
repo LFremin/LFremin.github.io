@@ -58,8 +58,8 @@ function runProgram(){
   }
 
   function wallCollision() {
-    var boardWidth = $('#board').width();
-    var boardHeight = $('#board').height();
+    var boardWidth = $('#board').width()-51;
+    var boardHeight = $('#board').height()-51;
     
     if (walker.x < 0) {
       walker.x = 0;
@@ -73,7 +73,7 @@ function runProgram(){
       walker.y = boardHeight;
     }
   }
-  
+
   $(document).on('keyup', handleKeyUp);
 
   function endGame() {
