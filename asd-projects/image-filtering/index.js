@@ -21,7 +21,7 @@ function resetAndRender() {
 function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
   applyFilterNoBackground(reddify)
-  
+ 
 
   // do not change the below line of code
   render($("#display"), image);
@@ -81,7 +81,7 @@ function decreaseBlue(array) {
   array[BLUE] = keepInBounds(BLUE - 50)
 }
 
-function increaseGreenByBlue(array) { 
+function increaseGreenByBlue(array) {
   array[GREEN] = keepInBounds(GREEN += BLUE)
 }
 
