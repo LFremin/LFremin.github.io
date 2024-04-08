@@ -1,4 +1,4 @@
-$(document).ready(runProgram); 
+$(document).ready(runProgram);
 
 function runProgram(){
   var FRAME_RATE = 60;
@@ -18,9 +18,9 @@ function runProgram(){
   function newFrame() {
     repositionGameItem();
     redrawGameItem();
-    wallCollision(); 
+    wallCollision();
   }
-  
+ 
   function handleKeyDown(event) {
     const KEY = {
       LEFT: 37,
@@ -28,7 +28,7 @@ function runProgram(){
       RIGHT: 39,
       DOWN: 40
     };
-    
+   
     if (event.which === KEY.LEFT) {
       walker.speedX = -5;
     } else if (event.which === KEY.UP) {
@@ -60,7 +60,7 @@ function runProgram(){
   function wallCollision() {
     var boardWidth = $('#board').width()-51;
     var boardHeight = $('#board').height()-51;
-    
+   
     if (walker.x < 0) {
       walker.x = 0;
     } else if (walker.x > boardWidth) {
@@ -81,3 +81,4 @@ function runProgram(){
     $(document).off();
   }
 }
+
